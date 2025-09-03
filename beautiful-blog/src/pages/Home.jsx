@@ -9,7 +9,7 @@ export default function Home() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/blogs/")
+    axios.get("https://myblog-x5a0.onrender.com/api/blogs/")
       .then(res => setBlogs(res.data))
       .catch(err => console.log(err));
   }, []);
