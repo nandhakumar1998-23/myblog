@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 export default function BlogCard({ blog }) {
   const navigate = useNavigate();
 
-  const imageUrl = blog.image
-    ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
-    : "https://via.placeholder.com/400x200.png?text=No+Image";
+const imageUrl = blog.image
+  ? `https://myblog-x5a0.onrender.com${blog.image.startsWith('/') ? '' : '/'}${blog.image}`
+  : "https://via.placeholder.com/400x200.png?text=No+Image";
+
 
   return (
     <Card sx={{ maxWidth: 400, m: 2, borderRadius: 3, boxShadow: 5 }}>
