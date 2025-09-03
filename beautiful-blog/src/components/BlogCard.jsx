@@ -15,7 +15,7 @@ export default function BlogCard({ blog }) {
       <CardMedia
         component="img"
         height="200",
-        width="400",
+        width="600",
         image={imageUrl} 
         alt={blog.title}
         onError={(e) => {
