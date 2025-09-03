@@ -9,8 +9,9 @@ import {
   Card,
   CardMedia,
   CardContent,
-  // Button,
 } from "@mui/material";
+
+const BACKEND_URL = "https://myblog-x5a0.onrender.com";
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ export default function BlogDetail() {
   // Fetch single blog
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/blogs/${id}/`)
+      .get(`${BACKEND_URL}/api/blogs/${id}/`)
       .then((res) => setBlog(res.data))
       .catch((err) => console.log(err));
   }, [id]);
@@ -29,7 +30,7 @@ export default function BlogDetail() {
   // Fetch related blogs
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/blogs/")
+      .get(`${BACKEND_URL}/api/blogs/`)
       .then((res) => {
         const filtered = res.data.filter((b) => b.id !== parseInt(id));
         setRelatedBlogs(filtered.slice(0, 4)); // show 4 related
@@ -38,6 +39,11 @@ export default function BlogDetail() {
   }, [id]);
 
   if (!blog) return <Typography>Loading...</Typography>;
+
+  // Full image URLs
+  const mainImage = blog.image
+    ? `${BACKEND_URL}${blog.image}`
+    : "https://via.placeholder.com/800x400?text=No+Image";
 
   return (
     <Container sx={{ py: 5 }}>
@@ -50,7 +56,7 @@ export default function BlogDetail() {
 
           <Box
             component="img"
-            src={blog.image}
+            src={mainImage}
             sx={{
               width: "100%",
               maxHeight: 400,
@@ -70,28 +76,34 @@ export default function BlogDetail() {
           <Typography variant="h5" gutterBottom>
             Related Blogs
           </Typography>
-          {relatedBlogs.map((rel) => (
-            <Card
-              key={rel.id}
-              sx={{ mb: 2, cursor: "pointer" }}
-              onClick={() => navigate(`/blog/${rel.id}`)}
-            >
-              <CardMedia
-                component="img"
-                height="140"
-                image={rel.image}
-                alt={rel.title}
-              />
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight="bold">
-                  {rel.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap>
-                  {rel.content}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
+          {relatedBlogs.map((rel) => {
+            const relImage = rel.image
+              ? `${BACKEND_URL}${rel.image}`
+              : "https://via.placeholder.com/400x200?text=No+Image";
+
+            return (
+              <Card
+                key={rel.id}
+                sx={{ mb: 2, cursor: "pointer" }}
+                onClick={() => navigate(`/blog/${rel.id}`)}
+              >
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={relImage}
+                  alt={rel.title}
+                />
+                <CardContent>
+                  <Typography variant="subtitle1" fontWeight="bold">
+                    {rel.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" noWrap>
+                    {rel.content}
+                  </Typography>
+                </CardContent>
+              </Card>
+            );
+          })}
         </Grid>
       </Grid>
     </Container>
