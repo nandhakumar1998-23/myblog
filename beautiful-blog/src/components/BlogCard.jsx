@@ -18,7 +18,7 @@ export default function BlogCard({ blog }) {
         alt={blog.title}
         sx={{
           height: 200,
-          width: "100%",
+          width: "400",
           objectFit: "cover",
         }}
       />
