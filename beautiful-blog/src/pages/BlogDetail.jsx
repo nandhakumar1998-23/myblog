@@ -9,7 +9,7 @@ import {
   Card,
   CardMedia,
   CardContent,
-  Button,
+  // Button,
 } from "@mui/material";
 
 export default function BlogDetail() {
