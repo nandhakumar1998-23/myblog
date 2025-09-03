@@ -18,10 +18,10 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY', 'django-insecure-placeholder-key'
 )
 
-# DEBUG mode (False in production)
+# DEBUG mode
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# Allowed hosts (comma-separated in environment variable)
+# Allowed hosts
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # -----------------------
@@ -66,12 +66,12 @@ ROOT_URLCONF = 'blogproject.urls'
 WSGI_APPLICATION = 'blogproject.wsgi.application'
 
 # -----------------------
-# TEMPLATES (Required for Admin)
+# TEMPLATES (Admin requires at least one DjangoTemplates backend)
 # -----------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Required for admin
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,3 +147,9 @@ CORS_ALLOWED_ORIGINS = [
 # DEFAULT AUTO FIELD
 # -----------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# -----------------------
+# Helper: full media URL for React frontend
+# -----------------------
+if not DEBUG:
+    MEDIA_URL = os.environ.get('MEDIA_URL', 'https://myblog-x5a0.onrender.com/media/')
