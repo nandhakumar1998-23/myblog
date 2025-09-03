@@ -66,6 +66,25 @@ ROOT_URLCONF = 'blogproject.urls'
 WSGI_APPLICATION = 'blogproject.wsgi.application'
 
 # -----------------------
+# TEMPLATES (Required for Admin)
+# -----------------------
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Required for admin
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+# -----------------------
 # DATABASE
 # -----------------------
 DATABASES = {
@@ -97,8 +116,8 @@ USE_TZ = True
 # STATIC FILES
 # -----------------------
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # optional
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # collectstatic output
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # optional custom static
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # -----------------------
