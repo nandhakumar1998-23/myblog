@@ -6,9 +6,10 @@ export default function BlogCard({ blog }) {
   const navigate = useNavigate();
 
   // Construct full image URL
-  const imageUrl = blog.image
+const imageUrl = blog.image
   ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
   : "https://via.placeholder.com/400x200?text=No+Image";
+
 
 
   return (
