@@ -78,8 +78,9 @@ export default function BlogDetail() {
           </Typography>
           {relatedBlogs.map((rel) => {
             const relImage = rel.image
-              ? `${BACKEND_URL}${rel.image}`
-              : "https://via.placeholder.com/400x200?text=No+Image";
+                ? `${BACKEND_URL}${rel.image.startsWith('/') ? '' : '/'}${rel.image}`
+                : "https://via.placeholder.com/400x200.png?text=No+Image";
+
 
             return (
               <Card
