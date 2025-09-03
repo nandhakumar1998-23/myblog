@@ -1,42 +1,38 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-export default function BlogCard({ blog }) {
-  const navigate = useNavigate();
-
-  // Ensure full image URL
-const imageUrl = blog.image
-  ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
-  : "https://via.placeholder.com/400x200?text=No+Image";
-
-
+const BlogCard = ({ blog }) => {
+  // Construct image URL
+  const imageUrl = blog.image
+    ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
+    : "https://via.placeholder.com/400x200?text=No+Image";
 
   return (
-    <Card sx={{ maxWidth: 345, m: 2, borderRadius: 3, boxShadow: 5 }}>
-      <CardMedia
-        component="img"
-        image={imageUrl}
+    <div className="blog-card border rounded shadow-lg overflow-hidden">
+      {/* Blog Image */}
+      <img
+        src={imageUrl}
         alt={blog.title}
-        sx={{
-          height: 200,   // in px
-          width: 400,    // in px
-          objectFit: "cover",
+        className="w-full h-48 object-cover"
+        onError={(e) => {
+          // Fallback if image fails to load
+          e.target.onerror = null;
+          e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
         }}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5">{blog.title}</Typography>
-        <Typography variant="body2" color="text.secondary">
-          {blog.content.slice(0, 100)}...
-        </Typography>
-        <Button
-          variant="contained"
-          sx={{ mt: 2, background: "linear-gradient(45deg, #f5084f, #ff6a00)" }}
-          onClick={() => navigate(`/blog/${blog.id}`)}
+
+      {/* Blog Content */}
+      <div className="p-4">
+        <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
+        <p className="text-gray-700 mb-4">{blog.description}</p>
+        <a
+          href={`/blogs/${blog.id}`}
+          className="text-blue-500 hover:underline"
         >
-          View More
-        </Button>
-      </CardContent>
-    </Card>
+          Read More
+        </a>
+      </div>
+    </div>
   );
-}
+};
+
+export default BlogCard;
