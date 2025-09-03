@@ -11,7 +11,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-placeholder-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # -----------------------
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
 # MIDDLEWARE
 # -----------------------
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Must be high
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Serve static files
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -115,12 +114,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # -----------------------
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Local development
 if DEBUG:
-    MEDIA_URL = '/media/'
-# Production
+    MEDIA_URL = '/media/'  # Local dev
 else:
-    MEDIA_URL = 'https://myblog-x5a0.onrender.com/media/'
+    MEDIA_URL = 'https://myblog-x5a0.onrender.com/media/'  # Production (temporary)
 
 # -----------------------
 # REST FRAMEWORK
