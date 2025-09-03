@@ -60,6 +60,7 @@ export default function BlogDetail() {
             sx={{
               width: "100%",
               maxHeight: 400,
+              width: 400,
               objectFit: "cover",
               mb: 3,
               borderRadius: 2,
