@@ -7,8 +7,9 @@ export default function BlogCard({ blog }) {
 
   // Construct full image URL
   const imageUrl = blog.image
-    ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
-    : "https://via.placeholder.com/400x200?text=No+Image";
+  ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
+  : "https://via.placeholder.com/400x200?text=No+Image";
+
 
   return (
     <Card sx={{ maxWidth: 345, m: 2, borderRadius: 3, boxShadow: 5 }}>
