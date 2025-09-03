@@ -1,38 +1,42 @@
 import React from "react";
+import { Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-const BlogCard = ({ blog }) => {
-  // Construct image URL
+export default function BlogCard({ blog }) {
+  const navigate = useNavigate();
+
+  // Construct full image URL
   const imageUrl = blog.image
     ? `https://myblog-x5a0.onrender.com/media/${blog.image}`
     : "https://via.placeholder.com/400x200?text=No+Image";
 
   return (
-    <div className="blog-card border rounded shadow-lg overflow-hidden">
-      {/* Blog Image */}
-      <img
-        src={imageUrl}
+    <Card sx={{ maxWidth: 345, m: 2, borderRadius: 3, boxShadow: 5 }}>
+      <CardMedia
+        component="img"
+        height="200"
+        image={imageUrl} 
         alt={blog.title}
-        className="w-full h-48 object-cover"
         onError={(e) => {
-          // Fallback if image fails to load
           e.target.onerror = null;
           e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
         }}
       />
-
-      {/* Blog Content */}
-      <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-        <p className="text-gray-700 mb-4">{blog.description}</p>
-        <a
-          href={`/blogs/${blog.id}`}
-          className="text-blue-500 hover:underline"
+      <CardContent>
+        <Typography gutterBottom variant="h5">
+          {blog.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {blog.content.slice(0, 100)}...
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{ mt: 2, background: "linear-gradient(45deg, #f5084f, #ff6a00)" }}
+          onClick={() => navigate(`/blog/${blog.id}`)}
         >
-          Read More
-        </a>
-      </div>
-    </div>
+          View More
+        </Button>
+      </CardContent>
+    </Card>
   );
-};
-
-export default BlogCard;
+}
