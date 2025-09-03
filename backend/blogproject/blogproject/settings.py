@@ -152,4 +152,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Helper: full media URL for React frontend
 # -----------------------
 if not DEBUG:
-    MEDIA_URL = os.environ.get('MEDIA_URL', 'https://myblog-x5a0.onrender.com/media/')
+    MEDIA_URL = 'https://myblog-x5a0.onrender.com/media/'
