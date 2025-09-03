@@ -18,7 +18,7 @@ const imageUrl = blog.image
         width="400"
         image={imageUrl}
         alt={blog.title}
-        sx={{ width: "100%", objectFit: "cover" }}
+        sx={{ width: "400", objectFit: "cover" }}
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = "https://via.placeholder.com/400x200.png?text=No+Image";
