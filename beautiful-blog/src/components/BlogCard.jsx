@@ -15,6 +15,7 @@ const imageUrl = blog.image
       <CardMedia
         component="img"
         height="300"
+        width="400"
         image={imageUrl}
         alt={blog.title}
         sx={{ width: "100%", objectFit: "cover" }}
