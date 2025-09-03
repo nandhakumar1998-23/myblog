@@ -12,17 +12,18 @@ export default function BlogCard({ blog }) {
 
   return (
     <Card sx={{ maxWidth: 345, m: 2, borderRadius: 3, boxShadow: 5 }}>
-      <CardMedia
-        component="img"
-        height="200"
-        width="600"
-        image={imageUrl} 
-        alt={blog.title}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
-        }}
-      />
+    <CardMedia
+      component="img"
+      height="200"
+      image={imageUrl}
+      alt={blog.title}
+      sx={{ objectFit: "cover" }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "https://via.placeholder.com/400x200?text=No+Image";
+      }}
+    />
+
       <CardContent>
         <Typography gutterBottom variant="h5">
           {blog.title}
