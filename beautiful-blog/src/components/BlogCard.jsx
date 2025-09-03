@@ -15,7 +15,7 @@ export default function BlogCard({ blog }) {
       <CardMedia
         component="img"
         height="300"
-        width= "400"
+        width= "300"
         image={imageUrl}
         alt={blog.title}
         sx={{ objectFit: "cover" }}
