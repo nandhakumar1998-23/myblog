@@ -17,8 +17,8 @@ export default function BlogCard({ blog }) {
         image={imageUrl}
         alt={blog.title}
         sx={{
-          height: 200,
-          width: 400,
+          height: 200,   // in px
+          width: 400,    // in px
           objectFit: "cover",
         }}
       />
