@@ -7,17 +7,20 @@ export default function BlogCard({ blog }) {
 
   // Ensure full image URL
   const imageUrl = blog.image
-    ? `https://myblog-x5a0.onrender.com${blog.image}`
+    ? `https://myblog-x5a0.onrender.com${blog.image.startsWith("/") ? "" : "/"}${blog.image}`
     : "https://via.placeholder.com/400x200?text=No+Image";
 
   return (
     <Card sx={{ maxWidth: 345, m: 2, borderRadius: 3, boxShadow: 5 }}>
       <CardMedia
         component="img"
-        height="200",
-        width=""400,
         image={imageUrl}
         alt={blog.title}
+        sx={{
+          height: 200,
+          width: "100%",
+          objectFit: "cover",
+        }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5">{blog.title}</Typography>
